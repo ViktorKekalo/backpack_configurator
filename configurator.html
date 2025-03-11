@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./configurator.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <button class="start-ar"><img src="./resourses/images/img_view-in-ar.png" alt=""> See In Real Life</button>
+            <div class="scene-wrapper"></div>
+            <div class="configurator-panel">
+                <div class="body-color configurator-block">
+                    <h3>body color</h3>
+                    <hr>
+                    <div class="configurator-buttons">
+                        <div class="configuration-option body-color-button selected" id="body-brown">
+                            <div class="option-color-wrapper">
+                                <div class="option-color"></div>
+                            </div>
+                            <span>brown</span>
+                        </div>
+                        <div class="configuration-option body-color-button" id="body-black">
+                            <div class="option-color-wrapper">
+                                <div class="option-color"></div>
+                            </div>
+                            <span>black</span>
+                        </div>
+                        <div class="configuration-option body-color-button" id="body-blue">
+                            <div class="option-color-wrapper">
+                                <div class="option-color"></div>
+                            </div>
+                            <span>blue</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="metal-color configurator-block">
+                    <h3>metal color</h3>
+                    <hr>
+                    <div class="configurator-buttons">
+                        <div class="configuration-option metall-color-button selected" id="metall-silver">
+                            <div class="option-color-wrapper">
+                                <div class="option-color"> <img src="./resourses/images/img_silver.png" alt=""></div>
+                            </div>
+                            <span>silver</span>
+                        </div>
+                        <div class="configuration-option metall-color-button" id="metall-gold">
+                            <div class="option-color-wrapper">
+                                <div class="option-color"><img src="./resourses/images/img_gold.png" alt=""></div>
+                            </div>
+                            <span>gold</span>
+                        </div>
+                        <div class="configuration-option metall-color-button" id="metall-black">
+                            <div class="option-color-wrapper">
+                                <div class="option-color"><img src="./resourses/images/img_black.png" alt=""></div>
+                            </div>
+                            <span>black</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="material configurator-block">
+                    <h3>material</h3>
+                    <hr>
+                    <div class="configurator-buttons">
+                        <button class="material-button selected" id="material-leather">leather</button>
+                        <button class="material-button" id="material-fabric">fabric</button>
+                        <button class="material-button" id="material-denim">denim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qr-popup">
+            <div class="qr-content">
+                <button class="close-popup-button"><img src="./resourses/images/img_close.png" alt=""></button>
+                <div class="qr-text">Scan the QR code with your phone. Within 1-3 seconds the AR function opens on your
+                    phone.</div>
+                <div class="qr-image">
+                    <img src="./resourses/images/img_qr.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.138.0/build/three.module.js"
+        }
+    }
+    </script>
+    <script type="module" defer src="./configurator-scene.js"></script>
+</body>
+
+</html>

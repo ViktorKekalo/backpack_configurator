@@ -1,0 +1,303 @@
+@charset "UTF-8";
+@import url('/utils/css/css-variables.css');
+
+/*Обнуление*/
+* {
+   padding: 0;
+   margin: 0;
+   border: 0;
+}
+
+*,
+*:before,
+*:after {
+   box-sizing: border-box;
+}
+
+:focus,
+:active {
+   outline: none;
+}
+
+a:focus,
+a:active {
+   outline: none;
+}
+
+nav,
+footer,
+aside {
+   display: block;
+}
+
+html,
+body {
+   font-family: 'Inter', sans-serif;
+   height: 100%;
+   width: 100%;
+   font-size: 100%;
+   line-height: 1;
+   font-size: 16px;
+   -ms-text-size-adjust: 100%;
+   -moz-text-size-adjust: 100%;
+   -webkit-text-size-adjust: 100%;
+   overflow-x: hidden;
+}
+
+@media (min-width: 1600px) {
+   html {
+      font-size: 20px;
+   }
+}
+
+
+
+input,
+button,
+textarea {
+   font-family: inherit;
+}
+
+input::-ms-clear {
+   display: none;
+}
+
+button {
+   cursor: pointer;
+}
+
+button::-moz-focus-inner {
+   padding: 0;
+   border: 0;
+}
+
+a,
+a:visited {
+   text-decoration: none;
+}
+
+a:hover {
+   text-decoration: none;
+}
+
+ul li {
+   list-style: none;
+}
+
+img {
+   vertical-align: top;
+}
+
+hr {
+   width: 100%;
+   height: 1px;
+   background-color: #1A1A1A;
+   margin-bottom: 14px;
+}
+
+.container {
+   width: 100%;
+   height: 100%;
+   background: #fff;   
+}
+
+.wrapper {
+   width: 60%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   margin: 0 auto;
+}
+
+.start-ar {
+   width: 156px;
+   height: 40px;
+   background-color: #4169E1;
+   font-size: 14px;
+   font-weight: 500;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   padding: 14px 12px;
+   border-radius: 30px;
+   color: #FFFFFF;
+   align-self: center;
+}
+
+.scene-wrapper {
+   width: 100%;
+   height: 60%;
+}
+
+.configurator-panel {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.configurator-panel h3 {
+   font-size: 14px;
+   font-weight: 600;
+   text-transform: uppercase;
+   margin-bottom: 14px;
+}
+
+.body-color {}
+
+.configurator-block {
+   min-width: 210px;
+}
+
+.configurator-buttons {
+   display: flex; 
+   gap: 20px;
+}
+
+.configuration-option {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 4px;
+   cursor: pointer;
+}
+
+.configuration-option span {
+   font-size: 12px;
+   font-weight: 500;
+   text-transform: capitalize;
+}
+
+.option-color-wrapper {
+   width: 48px;
+   height: 48px;
+   border-radius: 100px;
+   padding: 2px;
+   border: 2px solid transparent;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#body-brown .option-color {
+   background-color: #8B4512;
+}
+
+#body-black .option-color {
+   background-color: #1A1A1A;
+}
+
+#body-blue .option-color {
+   background-color: #104D97;
+}
+
+.body-color .option-color {
+   padding: 50%;
+   border-radius: 50px;
+}
+
+.configuration-option:hover .option-color-wrapper,
+.configuration-option.selected .option-color-wrapper {
+   border-color: #4169E1;
+}
+
+.configuration-option:hover span,
+.configuration-option.selected span {
+   color: #4169E1;
+}
+
+.option-color img {
+   display: block;
+   width: 100%;
+}
+
+.material-button {
+   font-size: 12px;
+   font-weight: 500;
+   background-color: transparent;
+   border-radius: 20px;
+   border: 1px solid #1A1A1A;
+   width: 80px;
+   height: 36px;
+   text-transform: capitalize;
+}
+
+.material-button.selected,
+.material-button:hover {
+   color: #4169E1;
+   border-color: #4169E1;
+}
+
+.metal-color {}
+
+.material {}
+
+.qr-popup {
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   top: -100%;
+   left: 0;
+   background-color: transparent;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.qr-popup.show {
+   top: 0;
+}
+
+.qr-content {
+   width: 305px;
+   height: auto;
+   border: 1px solid #4169E1;
+   border-radius: 30px;
+   padding: 16px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   background-color: #fff;
+}
+
+.close-popup-button {
+   align-self: end;
+   margin-bottom: 4px;
+   background-color: transparent;
+}
+
+.qr-text {
+   color: #4169E1;
+   font-size: 18px;
+   font-weight: 500;
+   width: 80%;
+   text-align: center;
+   padding: 10px;
+   border-bottom: 1px solid #4169E1;
+   margin-bottom: 30px;
+}
+
+.qr-image {
+   width: 70%;
+   border: 1px solid #4169E1;
+   border-radius: 30px;
+   padding: 30px;
+   margin-bottom: 24px;
+}
+
+.qr-image img {
+   max-width: 100%;
+}
+
+@media (max-width: 500px) {
+   .wrapper {
+      width: 100%;
+      padding: 16px;
+   }
+
+   .configurator-panel {
+      flex-direction: column;
+      gap: 16px;
+   }
+}
