@@ -124,7 +124,7 @@ init().then(animate);
 
 //#endregion
 
-//#region 3d settings
+//#region 3d 
 
 async function init() {
    scene = new THREE.Scene();
@@ -155,13 +155,9 @@ function exportGLB(scene) {
    exporter.parse(scene, (gltf) => {
       const blob = new Blob([JSON.stringify(gltf)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-
-      // Update <model-viewer> with the new model
       modelViewer.setAttribute("src", url);
-
-      // Clean up URL to prevent memory leaks
       setTimeout(() => URL.revokeObjectURL(url), 10000);
-   }, { binary: false }); // Export as JSON instead of binary
+   }, { binary: false });
 }
 
 function setupLights(scene) {
