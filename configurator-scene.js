@@ -14,7 +14,7 @@ const fabricMaterialButton = document.getElementById('material-fabric');
 const denimMaterialButton = document.getElementById('material-denim');
 const qrPopup = document.querySelector('.qr-popup');
 const closePopupButton = document.querySelector('.close-popup-button');
-const startARButton = document.querySelector('.start-ar');
+//const startARButton = document.querySelector('.start-ar');
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
 
 let scene, camera, renderer, controls;
@@ -83,11 +83,11 @@ blackMetallColor.onclick = () => {
    backpackManager.changeMetallColor(MetallColors.Black);
 }
 
-startARButton.onclick = () => {
-   if (!isMobileDevice) {
-      qrPopup.classList.add('show');
-   }
-}
+// startARButton.onclick = () => {
+//    if (!isMobileDevice) {
+//       qrPopup.classList.add('show');
+//    }
+// }
 
 closePopupButton.onclick = () => {
    qrPopup.classList.remove('show');
@@ -136,3 +136,31 @@ function setupLights(scene) {
    scene.add(ambientLight);
 }
 
+// AR Button and AR Integration with model-viewer
+const modelViewer = document.getElementById('ar-viewer');
+const startARButton = document.querySelector('.start-ar');
+
+// Disable AR initially
+//modelViewer.setAttribute('ar', false);
+
+// Start AR session on button click
+startARButton.addEventListener("click", () => {
+
+   const startARButton = document.getElementById("start-ar");
+   const sceneWrapper = document.querySelector(".scene-wrapper");
+   const arViewer = document.getElementById("ar-viewer");
+   // Hide Three.js scene
+   sceneWrapper.style.display = "none";
+
+   // Show model-viewer and set its height dynamically
+   arViewer.style.display = "block";
+   arViewer.style.width = "100vw";
+   arViewer.style.height = "100vh";
+
+   // Start AR
+   if (arViewer.activateAR) {
+      arViewer.activateAR();
+   } else {
+      console.error("activateAR() is not supported on this browser.");
+   }
+});
