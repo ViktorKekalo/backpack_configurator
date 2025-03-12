@@ -1,8 +1,9 @@
 import * as THREE from "three";
 import { OrbitControls } from "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFExporter } from 'https://unpkg.com/three@0.138.0/examples/jsm/exporters/GLTFExporter.js';
-
 import { Backpack, BodyColors, MetallColors, BodyMaterials } from "./configurator-manager.js";
+
+//#region consts
 
 const sceneWrapper = document.querySelector('.scene-wrapper');
 const brownBodyButton = document.getElementById('body-brown');
@@ -16,30 +17,43 @@ const fabricMaterialButton = document.getElementById('material-fabric');
 const denimMaterialButton = document.getElementById('material-denim');
 const qrPopup = document.querySelector('.qr-popup');
 const closePopupButton = document.querySelector('.close-popup-button');
-//const startARButton = document.querySelector('.start-ar');
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
+const modelViewer = document.getElementById('ar-viewer');
+const startARButton = document.querySelector('.start-ar');
+
+//#endregion
+
+//#region props
 
 let scene, camera, renderer, controls;
 let backpackManager, backpackModel;
 
+//#endregion
+
+//#region setup page
+
+window.addEventListener("resize", () => {
+   const { width, height } = sceneWrapper.getBoundingClientRect();
+   camera.aspect = width / height;
+   camera.updateProjectionMatrix();
+   renderer.setSize(width, height);
+});
+
 blackBodyButton.onclick = () => {
-   let bodyColorButtons = document.querySelectorAll('.body-color-button');
-   bodyColorButtons.forEach(button => button.classList.remove('selected'));
-   blackBodyButton.classList.add('selected');
+   removeSelectedClass('.body-color-button');
+   this.classList.add('selected');
    backpackManager.changeBodyColor(BodyColors.Black);
 }
 
 brownBodyButton.onclick = () => {
-   let bodyColorButtons = document.querySelectorAll('.body-color-button');
-   bodyColorButtons.forEach(button => button.classList.remove('selected'));
-   brownBodyButton.classList.add('selected');
+   removeSelectedClass('.body-color-button');
+   this.classList.add('selected');
    backpackManager.changeBodyColor(BodyColors.Brown);
 }
 
 blueBodyButton.onclick = () => {
-   let bodyColorButtons = document.querySelectorAll('.body-color-button');
-   bodyColorButtons.forEach(button => button.classList.remove('selected'));
-   blueBodyButton.classList.add('selected');
+   removeSelectedClass('.body-color-button');
+   this.classList.add('selected');
    backpackManager.changeBodyColor(BodyColors.Blue);
 }
 
@@ -85,17 +99,32 @@ blackMetallColor.onclick = () => {
    backpackManager.changeMetallColor(MetallColors.Black);
 }
 
-// startARButton.onclick = () => {
-//    if (!isMobileDevice) {
-//       qrPopup.classList.add('show');
-//    }
-// }
+startARButton.onclick = () => {
+   if (!isMobileDevice) {
+      qrPopup.classList.add('show');
+   } else {
+      exportGLB(backpackModel);
+      const arViewer = document.getElementById("ar-viewer");
+      arViewer.style.display = "block";
+      arViewer.style.width = "100vw";
+      arViewer.style.height = "100vh";
+      if (arViewer.activateAR) {
+         arViewer.activateAR();
+      } else {
+         alert("activateAR() is not supported on this browser.");
+      }
+   }
+}
 
 closePopupButton.onclick = () => {
    qrPopup.classList.remove('show');
 }
 
 init().then(animate);
+
+//#endregion
+
+//#region 3d settings
 
 async function init() {
    scene = new THREE.Scene();
@@ -114,58 +143,11 @@ async function init() {
    scene.add(backpackModel);
 }
 
-// Animation loop
 function animate() {
    requestAnimationFrame(animate);
    controls.update();
    renderer.render(scene, camera);
 }
-
-// Handle window resize
-window.addEventListener("resize", () => {
-   const { width, height } = sceneWrapper.getBoundingClientRect();
-   camera.aspect = width / height;
-   camera.updateProjectionMatrix();
-   renderer.setSize(width, height);
-});
-
-function setupLights(scene) {
-   const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-   dirLight.position.set(5, 5, 5);
-   dirLight.castShadow = true;
-   scene.add(dirLight);
-   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-   scene.add(ambientLight);
-}
-
-// AR Button and AR Integration with model-viewer
-const modelViewer = document.getElementById('ar-viewer');
-const startARButton = document.querySelector('.start-ar');
-
-// Disable AR initially
-//modelViewer.setAttribute('ar', false);
-
-// Start AR session on button click
-startARButton.addEventListener("click", () => {
-   exportGLB(backpackModel);
-   const startARButton = document.getElementById("start-ar");
-   const sceneWrapper = document.querySelector(".scene-wrapper");
-   const arViewer = document.getElementById("ar-viewer");
-   // Hide Three.js scene
-   sceneWrapper.style.display = "none";
-
-   // Show model-viewer and set its height dynamically
-   arViewer.style.display = "block";
-   arViewer.style.width = "100vw";
-   arViewer.style.height = "100vh";
-
-   // Start AR
-   if (arViewer.activateAR) {
-      arViewer.activateAR();
-   } else {
-      alert("activateAR() is not supported on this browser.");
-   }
-});
 
 function exportGLB(scene) {
    const exporter = new GLTFExporter();
@@ -180,4 +162,20 @@ function exportGLB(scene) {
       // Clean up URL to prevent memory leaks
       setTimeout(() => URL.revokeObjectURL(url), 10000);
    }, { binary: false }); // Export as JSON instead of binary
+}
+
+function setupLights(scene) {
+   const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+   dirLight.position.set(5, 5, 5);
+   dirLight.castShadow = true;
+   scene.add(dirLight);
+   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+   scene.add(ambientLight);
+}
+
+//#endregion
+
+function removeSelectedClass(name) {
+   let buttons = document.querySelectorAll(name);
+   buttons.forEach(button => button.classList.remove('selected'));
 }
