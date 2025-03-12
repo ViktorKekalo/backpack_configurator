@@ -291,6 +291,15 @@ hr {
    max-width: 100%;
 }
 
+#ar-viewer {
+   display: none;
+   /* Hide initially */
+   width: 100vw;
+   /* Full width */
+   height: 100vh;
+   /* Full height */
+}
+
 @media (max-width: 500px) {
    .wrapper {
       width: 100%;
