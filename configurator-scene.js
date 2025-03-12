@@ -134,7 +134,7 @@ function setupLights(scene) {
    dirLight.position.set(5, 5, 5);
    dirLight.castShadow = true;
    scene.add(dirLight);
-   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
    scene.add(ambientLight);
 }
 
@@ -163,7 +163,7 @@ startARButton.addEventListener("click", () => {
    if (arViewer.activateAR) {
       arViewer.activateAR();
    } else {
-      console.error("activateAR() is not supported on this browser.");
+      alert("activateAR() is not supported on this browser.");
    }
 });
 
@@ -171,7 +171,7 @@ function exportGLB(scene) {
    const exporter = new GLTFExporter();
 
    exporter.parse(scene, (gltf) => {
-      const blob = new Blob([gltf], { type: "model/gltf-binary" });
+      const blob = new Blob([JSON.stringify(gltf)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
 
       // Update <model-viewer> with the new model
@@ -179,5 +179,5 @@ function exportGLB(scene) {
 
       // Clean up URL to prevent memory leaks
       setTimeout(() => URL.revokeObjectURL(url), 10000);
-   }, { binary: true });
+   }, { binary: false }); // Export as JSON instead of binary
 }
