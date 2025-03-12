@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFExporter } from 'https://unpkg.com/three@0.138.0/examples/jsm/exporters/GLTFExporter.js';
+
 import { Backpack, BodyColors, MetallColors, BodyMaterials } from "./configurator-manager.js";
 
 const sceneWrapper = document.querySelector('.scene-wrapper');
@@ -145,7 +147,7 @@ const startARButton = document.querySelector('.start-ar');
 
 // Start AR session on button click
 startARButton.addEventListener("click", () => {
-
+   exportGLB(backpackModel);
    const startARButton = document.getElementById("start-ar");
    const sceneWrapper = document.querySelector(".scene-wrapper");
    const arViewer = document.getElementById("ar-viewer");
@@ -164,3 +166,18 @@ startARButton.addEventListener("click", () => {
       console.error("activateAR() is not supported on this browser.");
    }
 });
+
+function exportGLB(scene) {
+   const exporter = new GLTFExporter();
+
+   exporter.parse(scene, (gltf) => {
+      const blob = new Blob([gltf], { type: "model/gltf-binary" });
+      const url = URL.createObjectURL(blob);
+
+      // Update <model-viewer> with the new model
+      modelViewer.setAttribute("src", url);
+
+      // Clean up URL to prevent memory leaks
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+   }, { binary: true });
+}
