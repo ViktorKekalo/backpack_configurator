@@ -41,19 +41,19 @@ window.addEventListener("resize", () => {
 
 blackBodyButton.onclick = () => {
    removeSelectedClass('.body-color-button');
-   this.classList.add('selected');
+   blackBodyButton.classList.add('selected');
    backpackManager.changeBodyColor(BodyColors.Black);
 }
 
 brownBodyButton.onclick = () => {
    removeSelectedClass('.body-color-button');
-   this.classList.add('selected');
+   brownBodyButton.classList.add('selected');
    backpackManager.changeBodyColor(BodyColors.Brown);
 }
 
 blueBodyButton.onclick = () => {
    removeSelectedClass('.body-color-button');
-   this.classList.add('selected');
+   blueBodyButton.classList.add('selected');
    backpackManager.changeBodyColor(BodyColors.Blue);
 }
 
