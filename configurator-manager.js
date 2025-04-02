@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "https://unpkg.com/three@0.138.0/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from "./three/gltfLoader.js";
 
 const BodyColors = {
    Brown: new THREE.Color(0x8B4512),
@@ -93,10 +93,20 @@ class Backpack {
          texturesSet = this.#downloadTextures();
       }
       this.#backpackBody.material.map = texturesSet.baseColor;
+      this.#backpackBody.material.map.encoding = THREE.NoColorSpace;
+      this.#backpackBody.material.map.flipY = false;
       this.#backpackBody.material.normalMap = texturesSet.normal;
+      this.#backpackBody.material.normalMap.encoding = THREE.NoColorSpace;
+      this.#backpackBody.material.normalMap.flipY = false;
       this.#backpackBody.material.roughnessMap = texturesSet.occlusionRoughnessMetallic;
+      this.#backpackBody.material.roughnessMap.encoding = THREE.NoColorSpace;
+      this.#backpackBody.material.roughnessMap.flipY = false;
       this.#backpackBody.material.metalnessMap = texturesSet.occlusionRoughnessMetallic;
+      this.#backpackBody.material.metalnessMap.encoding = THREE.NoColorSpace;
+      this.#backpackBody.material.metalnessMap.flipY = false;
       this.#backpackBody.material.aoMap = texturesSet.occlusionRoughnessMetallic;
+      this.#backpackBody.material.aoMap.encoding = THREE.NoColorSpace;
+      this.#backpackBody.material.aoMap.flipY = false;
    }
 
    #downloadTextures() {

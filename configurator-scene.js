@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { OrbitControls } from "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js";
-import { GLTFExporter } from 'https://unpkg.com/three@0.138.0/examples/jsm/exporters/GLTFExporter.js';
+import { OrbitControls } from "./three/orbitControls.js";
+import { GLTFExporter } from './three/gltfExporter.js';
 import { Backpack, BodyColors, MetallColors, BodyMaterials } from "./configurator-manager.js";
 
 //#region consts
